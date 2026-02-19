@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.7, pytest-9.0.2, pluggy-1.6.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/sander/git/sjo-sabctools
+configfile: pytest.ini
+plugins: benchmark-5.2.3
+collected 3 items
+
+tests/test_benchmark.py sabctools version: 9.3.2
+...
+
+
+---------------------------------------------------------------------------------------------- benchmark: 2 tests ---------------------------------------------------------------------------------------------
+Name (time in us)                Min                    Max                  Mean              StdDev                Median                   IQR            Outliers         OPS            Rounds  Iterations
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+test_sabctools_decode       457.0700 (1.0)       2,349.4330 (1.0)        751.5244 (1.0)      230.9700 (1.0)        708.7570 (1.0)        255.0778 (1.0)        331;43  1,330.6288 (1.0)        1045           1
+test_python_decode        5,578.8080 (12.21)    10,327.6980 (4.40)     7,090.4669 (9.43)     922.6506 (3.99)     6,856.4500 (9.67)     1,032.6830 (4.05)         27;7    141.0344 (0.11)        123           1
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Legend:
+  Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
+  OPS: Operations Per Second, computed as 1 / Mean
+============================== 3 passed in 2.78s ===============================

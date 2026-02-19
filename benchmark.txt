@@ -1,0 +1,10 @@
+venv/bin/python3 -m pytest tests/test_benchmark.py -s 2>&1 | tee result.txt
+
+cat result.txt | awk '/test_sabctools_decode/ {print $15}' | sed 's/,//g; s/\..*//' | awk '{print $1 * 0.39 " MB/s"}'
+
+On an Intel i3:
+
+$ cat result.txt | awk '/test_sabctools_decode/ {print $15}' | sed 's/,//g; s/\..*//' | awk '{print $1 * 0.39 " MB/s"}'
+518.7 MB/s
+
+
