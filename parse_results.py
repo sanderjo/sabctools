@@ -23,7 +23,40 @@ except:
     print("No file provided, reading from stdin...")
     parseresults(sys.stdin)
 
-# find the CPU this python script is running on, and print it
+
 import platform
-print(f"Running on CPU: {platform.processor()}")
+import subprocess
+import os
+
+def get_processor_name():
+    # Method 1: Standard library
+    proc = platform.processor()
+    if proc:
+        return proc
+
+    # Method 2: Windows Registry/Environment
+    if platform.system() == "Windows":
+        return os.environ.get('PROCESSOR_IDENTIFIER', 'Unknown Windows CPU')
+
+    # Method 3: Linux (reading /proc/cpuinfo)
+    if platform.system() == "Linux":
+        command = "cat /proc/cpuinfo | grep 'model name' | uniq"
+        try:
+            line = subprocess.check_output(command, shell=True).decode().strip()
+            return line.split(":")[1].strip()
+        except:
+            pass
+
+    # Method 4: macOS
+    if platform.system() == "Darwin":
+        os.environ['PATH'] = os.environ['PATH'] + os.pathsep + '/usr/sbin'
+        try:
+            return subprocess.check_output(['sysctl', '-n', 'machdep.cpu.brand_string']).decode().strip()
+        except:
+            pass
+
+    return "CPU name not found"
+
+print(f"Processor: {get_processor_name()}")
+print(f"Architecture: {platform.machine()}")
 
